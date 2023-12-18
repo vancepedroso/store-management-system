@@ -218,6 +218,25 @@ table > tbody > tr > td {
 #defaultLayout main {
     padding: 2rem;
 }
+.custom-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+footer {
+    padding: 10px;
+    background-color: #f8f9fa;
+    text-align: center;
+    color: #777;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .animated {
     -webkit-animation-duration: 0.3s;

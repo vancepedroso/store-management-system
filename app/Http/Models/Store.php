@@ -14,7 +14,8 @@ class Store extends Model
         'phone',
         'email',
         'manager_name',
-        'descripton',
+        'description',  // Corrected spelling here
         'website'
     ];
+    
 }

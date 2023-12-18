@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UpdateEmployeeRequest;
 //use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Resources\EmployeeResources;
+use App\Http\Models\Store;
 
 class EmployeeController extends Controller
 {
@@ -20,6 +21,7 @@ class EmployeeController extends Controller
     {
         $employees = Employee::all();
         return response()->json(['employees' => $employees], 200);
+        
     }
 
     /**
@@ -83,25 +85,30 @@ class EmployeeController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateEmployeeRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        // Find the employee by ID
         $employee = Employee::find($id);
 
         if (!$employee) {
             return response()->json(['message' => 'Employee not found'], 404);
         }
-    
-        $data = $request->validated();
-    
-        // Attempt to update the employee
-        $updateResult = $employee->update($data);
-    
+
+        // Update the employee with the request data
+        //$employee->update($request->all());
+
+        // Return the updated employee data
+        //return response()->json($employee);
+
+         // Update the employee with the request data
+        $updateResult = $employee->update($request->all());
+
         if ($updateResult) {
-            // Employee successfully updated
-            return response()->json(['message' => 'Employee updated successfully', 'data' => $employee], 200);
+            // Return a success response
+            return response()->json(['status' => 1, 'message' => 'Successfully edited'],200);
         } else {
-            // Failed to update employee
-            return response()->json(['message' => 'Failed to update employee'], 500);
+            // Return an error response
+            return response()->json(['status' => 0, 'message' => 'Failed to edit employee'], 500);
         }
     }
 

@@ -13,6 +13,23 @@ export default function Store(){
       getUsers();
   },[])
 
+  const onDeleteClick = user => {
+    if (!window.confirm("Are you sure you want to delete this user?")) {
+      return
+    }
+    axiosClient.delete(`/store/${user.id}`)
+      .then(() => {
+            setNotification('Store was successfully deleted')
+            getUsers()
+            location.reload(true);
+          })
+          .catch(error => {
+            // Handle error if needed
+            //console.error('Error deleting user:', error);
+            console.log(error);
+          });
+    }
+
   const getUsers = (() => {
     axiosClient.get('/store')
     .then(({data})=>
@@ -32,7 +49,7 @@ export default function Store(){
     <div>
       <div style={{display: 'flex', justifyContent: "space-between", alignItems: "center"}}>
         <h1>Store Management</h1>
-        <Link className="btn-add" to="/users/new">Add new</Link>
+        <Link className="btn-add" to="/newstore">Add new</Link>
       </div>
       <div className="card animated fadeInDown">
         <table>
@@ -71,7 +88,7 @@ export default function Store(){
                 <td>{u.description}</td>
                 <td>{u.website}</td>
                 <td>
-                  <Link className="btn-edit" to={'/users/' + u.id}>Edit</Link>
+                  <Link className="btn-edit" to={'/updatestore/' + u.id}>Edit</Link>
                   &nbsp;
                   <button className="btn-delete" onClick={ev => onDeleteClick(u)}>Delete</button>
                 </td>

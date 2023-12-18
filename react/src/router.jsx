@@ -4,6 +4,9 @@ import Signup from "./views/Signup.jsx";
 import Users from "./views/Users.jsx";
 import Employee from "./views/Employee.jsx";
 import Store from "./views/Store.jsx";
+import NewStore from "./views/NewStore.jsx";
+import UpdateEmployee from "./views/UpdateEmployee.jsx";
+import UpdateStore from "./views/UpdateStore.jsx";
 import NotFound from "./views/NotFound.jsx";
 import DefaultLayout from "./views/components/DefaultLayout.jsx";
 import Dashboard from "./views/Dashboard.jsx";
@@ -35,6 +38,18 @@ const router = createBrowserRouter([
             {
                 path: '/store',
                 element: <Store/>
+            },
+            {
+                path: '/newstore',
+                element: <NewStore/>
+            },
+            {
+                path: '/updateemployee/:id',
+                element: <UpdateEmployee/>
+            },
+            {
+                path: '/updatestore/:id',
+                element: <UpdateStore/>
             }
 
         ]

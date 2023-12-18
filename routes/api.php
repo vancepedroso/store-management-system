@@ -35,6 +35,9 @@ Route::put('/employees/{id}', [EmployeeController::class, 'update']);
 Route::delete('/employees/{id}', [EmployeeController::class, 'destroy']);
 
 Route::get('/store', [StoreController::class, 'index']);
+Route::post('/store', [StoreController::class, 'store']);
+Route::put('/store/{id}', [StoreController::class, 'update']);
+Route::delete('/store/{id}', [StoreController::class, 'destroy']);
 
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);

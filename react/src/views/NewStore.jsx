@@ -6,27 +6,17 @@ import { useStateContext } from "../contexts/ContextProvider";
 import { useState } from "react";
 import { useEffect } from "react";
 
-export default function Employee(){
+export default function NewStore(){
 
     const nameRef = useRef();
-    const emailRef = useRef();
+    const locationRef = useRef();
     const phoneRef = useRef();
-    const positionRef = useRef();
-    const storeRef = useRef();
+    const emailRef = useRef();
+    const managerRef = useRef();
+    const descRef = useRef();
+    const webRef = useRef();
     const [errors, setErrors] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
-    const [stores, setStores] = useState([]);
-
-    useEffect(() => {
-        // Fetch stores when the component mounts
-        axiosClient.get('/store')
-          .then(response => {
-            setStores(response.data.stores);
-          })
-          .catch(error => {
-            console.error('Error fetching stores:', error);
-          });
-      }, []);
 
     useEffect(() => {
         // Check if successMessage is set and clear the fields
@@ -37,35 +27,34 @@ export default function Employee(){
     
       const clearInputFields = () => {
         nameRef.current.value = '';
-        emailRef.current.value = '';
+        locationRef.current.value = '';
         phoneRef.current.value = '';
-        positionRef.current.value = '';
-        storeRef.current.value = '';
+        emailRef.current.value = '';
+        managerRef.current.value = '';
+        descRef.current.value = '';
+        webRef.current.value = '';
       };
 
     const {setUser, setToken} = useStateContext()
-    
-    const handleStoreChange = (event) => {
-        // Update storeRef value when the selection changes
-        storeRef.current.value = event.target.value;
-      };
 
     const onSubmit = (ev) => {
         ev.preventDefault()
 
         const payload = {
             name: nameRef.current.value,
-            email: emailRef.current.value,
+            location: locationRef.current.value,
             phone: phoneRef.current.value,
-            position: positionRef.current.value,
-            store: storeRef.current.value,
+            email: emailRef.current.value,
+            manager_name: managerRef.current.value,
+            description: descRef.current.value,
+            website: webRef.current.value,
         }
         console.log(payload);
 
-        axiosClient.post('/employees', payload)
+        axiosClient.post('/store', payload)
         .then(({data}) => {
             setSuccessMessage(data.message);
-            if(data.status == 201)
+            if(data.status == 1)
             {
                 clearInputFields();
             }
@@ -86,7 +75,7 @@ export default function Employee(){
            <div className="form">
             <form onSubmit={onSubmit}>
                 <h1 className="title">
-                    Add new Employee
+                    Add new Store
                 </h1>
                 {successMessage && (
                     <div className="success-message">{successMessage}</div>
@@ -97,18 +86,13 @@ export default function Employee(){
                     ))}
                 </div>
                 }
-                <input ref={nameRef} placeholder="Full Name"/>
-                <input ref={emailRef} type="email" placeholder="Email"/>
+                <input ref={nameRef} placeholder="Store Name"/>
+                <input ref={locationRef}  placeholder="Location"/>
                 <input ref={phoneRef} placeholder="Phone" />
-                <input ref={positionRef} placeholder="Position"/>
-                <select ref={storeRef} onChange={handleStoreChange} className="custom-select mb-2" placeholder="Store">
-                 {/* Populate the dropdown with store names */}
-                    {stores.map((store) => (
-                    <option key={store.id} value={store.name}>
-                        {store.name}
-                    </option>
-                    ))}
-                </select>
+                <input ref={emailRef}  placeholder="Email"/>
+                <input ref={managerRef}  placeholder="Manager"/>
+                <input ref={descRef}  placeholder="Description"/>
+                <input ref={webRef}  placeholder="Website"/>
                 <button className="btn btn-block">Add</button>
             </form>
            </div>

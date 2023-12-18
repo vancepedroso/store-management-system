@@ -49,7 +49,7 @@ export default function Users(){
         <div>
           <div style={{display: 'flex', justifyContent: "space-between", alignItems: "center"}}>
             <h1>Employee Management</h1>
-            <Link className="btn-add" to="/users/new">Add new</Link>
+            <Link className="btn-add" to="/employee">Add new</Link>
           </div>
           <div className="card animated fadeInDown">
             <table>
@@ -84,7 +84,7 @@ export default function Users(){
                     <td>{u.position}</td>
                     <td>{u.store}</td>
                     <td>
-                      <Link className="btn-edit" to={'/users/' + u.id}>Edit</Link>
+                      <Link className="btn-edit" to={'/updateemployee/' + u.id}>Edit</Link>
                       &nbsp;
                       <button className="btn-delete" onClick={ev => onDeleteClick(u)}>Delete</button>
                     </td>

@@ -52,6 +52,10 @@ export default function DefaultLayout(){
             <main>
               <Outlet />
             </main>
+            <footer>
+                {/* Customize the footer content as needed */}
+                <p>&copy; 2023 Created by Vance Pedroso </p>
+            </footer>
            </div>
         </div>
     )
